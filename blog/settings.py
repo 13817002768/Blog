@@ -27,7 +27,7 @@ SECRET_KEY = '6vxaafz5a4%6e$&3__@hs*gdkndth31=-tprz60mqdje04_+hi'
 DEBUG = True
 
 # tianjai
-ALLOWED_HOSTS = ['heroku-app100.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -130,3 +130,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+django_heroku.settings(locals())
