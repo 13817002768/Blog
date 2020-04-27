@@ -32,6 +32,7 @@
 
 
         </div><!-- /.blog-post -->
+        <br>
         <input id="comment" type="text"/>
         <button class="send_ajax" id="12">评论</button>
         
@@ -77,14 +78,15 @@
 
         var article = $("#article").html();
         var comment = $("#comment").val();
+        var author = $('#username').html();
 
         $.ajax({
             url:"/add_comment/",
             type:"POST",
-            data:{username:"zhangsan",article:article,comment:comment},
+            data:{username:author,article:article,comment:comment},
             success:function(data){
                 htm = document.getElementById('div1').innerHTML;
-                document.getElementById('div1').innerHTML = "<p style='display:inline;'>"+"zhangsan"+
+                document.getElementById('div1').innerHTML = "<p style='display:inline;'>"+author+
                 "</p>&nbsp;&nbsp;<p style='display:inline;'>" + time.getFullYear() + "年" + (parseInt(time.getMonth())+1) +
                 "月" + time.getDate() + "日 " + time.getHours() + ":" + time.getMinutes() + "</p><p>" +
                 comment + "</p>" + htm;

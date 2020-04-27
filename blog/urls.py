@@ -20,7 +20,7 @@ from app1 import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/',include('app1.urls')),
-    path('', views.index,name='index'),
+    path('', views.login,name='index'),
     path('login/',views.login, name='login'),
     path('register/', views.register, name='register'),
     path('base/', views.base, name='base'),
@@ -35,4 +35,5 @@ urlpatterns = [
     path('update_blog/<blog_id>', views.update_blog, name='update_blog'),
     path('update_password/', views.update_password, name='update_password'),
     path('find_by_title/<title>', views.find_by_title, name='find_by_title'),
+    path('logout/', views.logout, name='logout'),
 ]

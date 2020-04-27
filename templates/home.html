@@ -18,7 +18,7 @@
         <div class="blog-post">
           <a href="{% url 'blog_detail' blog.blog_id %}"><h2 class="blog-post-title">{{ blog.title }}</h2></a>
 
-          <p>{{ blog.content }}</p>
+          <p>{{ blog.content|truncatechars:30 }}</p>
 
 
           <span class="text"><p class="blog-post-meta" style="display: inline;">{{ blog.author }}</p>

@@ -7,11 +7,12 @@ def index(request):
     return render(request, 'index.html')
 
 
+# 登录功能
 def login(request):
     if(request.method == 'POST'):
         username = request.POST.get('username','')
         password = request.POST.get('password','')
-        print(password)
+
         user = User.objects.filter(username=username)
         if(user):
             user = User.objects.get(username=username)
@@ -31,7 +32,7 @@ def login(request):
     else:
         return render(request, 'login.html')
 
-
+# 注册功能，成功注册返回登录页面
 def register(request):
     if(request.method=="POST"):
         username = request.POST.get('username')
@@ -51,7 +52,7 @@ def register(request):
 
         user.save()
 
-        return render(request, 'index.html')
+        return render(request, 'login.html')
 
 
 
@@ -62,6 +63,7 @@ def base(request):
 
 def message(request):
     return render(request, 'message.html')
+
 
 def home(request):
 
@@ -81,10 +83,15 @@ def home(request):
     else:
         return redirect('/login')
 
+# 退出功能，退出时清除session并返回登录页
+def logout(request):
+    request.session.flush()
+    return redirect('/login')
 
+# 分类查询博客
 def find_by_category(request, category):
-    print(category)
-    print(type(category))
+
+    username = request.session.get('username')
     #category = request.GET.get('category')
     blogs = Blog.objects.filter(category = Category.objects.get(name = category))
 
@@ -94,8 +101,9 @@ def find_by_category(request, category):
         comment_nums.append(comments)
 
     categorys = Category.objects.all()
-    return render(request, 'home.html', {'blogs': blogs, 'categorys': categorys, 'comment_nums': comment_nums})
+    return render(request, 'home.html', {'blogs': blogs, 'categorys': categorys, 'comment_nums': comment_nums, 'username':username})
 
+# 通过博客的id查询博客的详细信息
 def blog_detail(request, blog_id):
     if(request.session.get('IS_LOGIN')):
         username = request.session.get('username')
@@ -107,6 +115,7 @@ def blog_detail(request, blog_id):
     else:
         return redirect('/login')
 
+# 评论功能
 def add_comment(request):
     username = request.POST.get('username')
     article = request.POST.get('article')
@@ -121,6 +130,7 @@ def add_comment(request):
     
     return HttpResponse('12')
 
+# 查找所有我的个人博客
 def my_blog(request, username):
     user = User.objects.get(username=username)
     blogs = Blog.objects.filter(author=user)
@@ -133,6 +143,7 @@ def my_blog(request, username):
 
     return render(request, 'my_blog.html', {'blogs':blogs, 'categorys':categorys, 'username':username})
     
+# 删除博客
 def del_blog(request, blog_id):
     Blog.objects.filter(blog_id=blog_id).delete()
 
@@ -148,6 +159,7 @@ def del_blog(request, blog_id):
 
     return render(request, 'my_blog.html', {'blogs':blogs, 'categorys':categorys, 'username':username})
 
+# 新增博客
 def add_blog(request):
     if(request.method == "POST"):
         title = request.POST.get('title')
@@ -179,6 +191,7 @@ def add_blog(request):
         categorys = Category.objects.all()
         return render(request, 'add_blog.html', {'username':username, 'categorys':categorys})
 
+# 修改博客
 def update_blog(request, blog_id):
     if(request.method == 'POST'):
         title = request.POST.get('title')
@@ -199,6 +212,7 @@ def update_blog(request, blog_id):
         categorys = Category.objects.all()
         return render(request, 'update_blog.html', {'username':username, 'categorys':categorys, 'blog':blog})
 
+# 修改登录密码
 def update_password(request):
     username = request.session.get('username')
     if(request.method == 'POST'):
@@ -220,7 +234,7 @@ def update_password(request):
     else:
         return render(request, 'update_password.html', {'username':username})
 
-
+# 通过标题模糊查询博客
 def find_by_title(request, title):
     username = request.session.get('username')
     blogs = Blog.objects.filter(title__contains=title)

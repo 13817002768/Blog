@@ -36,13 +36,14 @@
     <div>
       <ul class="nav nav-tabs">
         <li role="presentation"><a href="{% url 'home' %}">Home</a></li>
-        <li role="presentation" class="active"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>
+        <!-- <li role="presentation" class="active"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li> -->
         <li role="presentation"><a href="{% url 'my_blog' username %}" >我的博客</a></li>
         <li role="presentation"><input type="text" id="search" class="form-control" placeholder="Search for..."></li>
         <li role="presentation"><button onclick="fun1()" class="btn btn-default" type="button">Go!</button></li>
         <li role="presentation" style="float: right;"><a href="#" id="username">{{ username }}</a></li>
-        <li role="presentation" style="float: right;"><a href="{% url 'update_password' %}" id="username">修改密码</a></li>
+        <li role="presentation" style="float: right;"><a href="{% url 'logout' %}" >退出</a></li>
+        <li role="presentation" style="float: right;"><a href="{% url 'update_password' %}" >修改密码</a></li>
         <li role="presentation" style="float: right;"><a href="{% url 'add_blog' %}" >写博客</a></li>
 
       </ul>

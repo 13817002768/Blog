@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,7 +27,7 @@ SECRET_KEY = '6vxaafz5a4%6e$&3__@hs*gdkndth31=-tprz60mqdje04_+hi'
 DEBUG = True
 
 # tianjai
-ALLOWED_HOSTS = ['heroku-app100.herokuapp.com']
+ALLOWED_HOSTS = ['heroku-app100.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app1',
 ]
+
+# xinzen
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# config['STATIC_ROOT'] = os.path.join(config['BASE_DIR'], 'staticfiles')
 
 # 配置静态资源文件路径
 STATICFILES_DIRS = [
