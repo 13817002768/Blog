@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <title>Blog Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  </head>
+
+  <body>
+
+    <!-- <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="#">Home</a>
+          <a class="blog-nav-item" href="#">New features</a>
+          <a class="blog-nav-item" href="#">Press</a>
+          <a class="blog-nav-item" href="#">New hires</a>
+          <a class="blog-nav-item" href="#">About</a>
+        </nav>
+      </div>
+    </div> -->
+    <div>
+      <ul class="nav nav-tabs">
+        <li role="presentation"><a href="{% url 'home' %}">Home</a></li>
+        <li role="presentation" class="active"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+        <li role="presentation"><a href="{% url 'my_blog' username %}" >我的博客</a></li>
+        <li role="presentation"><input type="text" id="search" class="form-control" placeholder="Search for..."></li>
+        <li role="presentation"><button onclick="fun1()" class="btn btn-default" type="button">Go!</button></li>
+        <li role="presentation" style="float: right;"><a href="#" id="username">{{ username }}</a></li>
+        <li role="presentation" style="float: right;"><a href="{% url 'update_password' %}" id="username">修改密码</a></li>
+        <li role="presentation" style="float: right;"><a href="{% url 'add_blog' %}" >写博客</a></li>
+
+      </ul>
+      
+    </div>
+    {% block mainbody %}
+    <p>as</p>
+    {% endblock %}
+
+  <script>
+    
+    function fun1(){
+      var title = $('#search').val();
+      if(title){
+        window.location.href = "/find_by_title/" + title;
+      }
+      else
+        alert('请输入查询内容！');
+    }
+  
+  </script>
+    
+  </body>
+</html>

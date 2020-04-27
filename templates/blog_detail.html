@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block mainbody %}
+
+
+
+<div class="container">
+
+    <div class="blog-header">
+      <h1 class="blog-title">The Bootstrap Bog</h1>
+      <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-8 blog-main">
+
+
+
+
+        <div class="blog-post">
+          <a href="#"><h2 class="blog-post-title"></h2></a>
+
+            <h1>{{ blog.title }}</h1>
+            <p id="article" style="display: none;">{{ blog.blog_id }}</p>
+            <p style="display: inline;" id="author">{{ blog.author }}</p>&nbsp;&nbsp;
+            <p style="display: inline;">最后发布于</p>
+            <p style="display: inline;">{{ blog.create_time }}</p>
+          <span class="text"><p class="blog-post-meta">{{ blog.content }}</p>
+
+          </span>
+
+
+        </div><!-- /.blog-post -->
+        <input id="comment" type="text"/>
+        <button class="send_ajax" id="12">评论</button>
+        
+        <div class="blog-post" id="div1">
+
+            {% for comment in comments %}
+
+            <p style="display: inline;">{{ comment.author }}</p>&nbsp;&nbsp;
+            <p style="display: inline;">{{ comment.createtime }}</p>
+            <P>{{ comment.body }}</P>
+
+            {% endfor %}
+        </div>
+        
+  
+
+
+
+      </div><!-- /.blog-main -->
+
+
+
+
+      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset">
+
+        </div>
+        <div class="sidebar-module">
+          
+        </div>
+        <div class="sidebar-module">
+          
+        </div>
+      </div><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+
+  </div><!-- /.container -->
+
+<script>
+    $("#12").click(function(){
+        var time = new Date();
+
+        var article = $("#article").html();
+        var comment = $("#comment").val();
+
+        $.ajax({
+            url:"/add_comment/",
+            type:"POST",
+            data:{username:"zhangsan",article:article,comment:comment},
+            success:function(data){
+                htm = document.getElementById('div1').innerHTML;
+                document.getElementById('div1').innerHTML = "<p style='display:inline;'>"+"zhangsan"+
+                "</p>&nbsp;&nbsp;<p style='display:inline;'>" + time.getFullYear() + "年" + (parseInt(time.getMonth())+1) +
+                "月" + time.getDate() + "日 " + time.getHours() + ":" + time.getMinutes() + "</p><p>" +
+                comment + "</p>" + htm;
+            },
+
+            error:function(){
+                alert('评论失败')
+            }
+        })
+    })
+
+</script>
+
+{% endblock %}
