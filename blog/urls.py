@@ -20,7 +20,7 @@ from app1 import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/',include('app1.urls')),
-    path('/', views.login,name='index'),
+    path('', views.login,name='index'),
     path('login/',views.login, name='login'),
     path('register/', views.register, name='register'),
     path('base/', views.base, name='base'),
