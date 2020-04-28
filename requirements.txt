@@ -4,3 +4,4 @@ Django==2.2.3
 django-heroku==0.3.1
 static3==0.7.0
 gunicorn
+Pillow
